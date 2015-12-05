@@ -1,0 +1,65 @@
+Author: Phillip Stewart
+phillipwstewart@csu.fullerton.edu
+CPSC 351, Spring 2015, Project 4
+
+
+Both programs may be compiled by running:
+ $ make
+
+proc_parse may also be created by running:
+ $ make proc_parse
+
+Running:
+ $ ./proc_parse
+Will print output similar to:
+
+Processor:       Intel(R) Core(TM) i7-2820QM CPU @ 2.30GHz
+Processor cores: 8
+Kernel version:  Ubuntu 3.2.0-80.116-generic 3.2.68
+Total RAM:       8130484 kB
+Uptime:          07H:19M:36S
+
+
+Running:
+ $ ./proc_parse 2 2
+Will print output similar to:
+
+User: 1.95  System: 1.38  Idle: 96.67
+Free memory: 4136884 kB  (50.88%)
+Disk read: 0.00, write: 0.00  (sectors per second)
+Context switches: 2030.00 (switches per second)
+Process creation rate: 0.00 (processes per second)
+
+-every 2 seconds.
+The 2 arguments supplied to proc_parse are the read_rate and write_rate.
+That is, the number of seconds stats are gathered,
+and the number of seconds between printing the data to the screen.
+
+
+shell may also be created by running:
+ $ make shell
+
+Running:
+ $ ./shell
+
+Will open a new shell inside the terminal, and give the user a prompt:
+
+CPSC351Shell:~$
+
+The user may enter bash commands, may pipe, and may background with &.
+
+Ex:
+CPSC351Shell:~:./proc_parse 2 2 | grep Disk
+
+Backgrounding works similar as in bash, and may cause output from the
+backgrounded process to print over your terminal.
+Backgrounded processes may be viewed with the 'jobs' command.
+However, finished jobs are harvested, and removed from the jobs list.
+Note: the shell only attempts to harvest backgrounded jobs when enter is pressed.
+
+The shell works great, but there is one minor flaw -
+If the user enters a command with pipes and backgrounds it, only the last
+program in the pipe will execute in the background... This reduces complexity for
+harvesting jobs and is only noticeable in special cases.
+I planned to track process pids of piped backgrounded jobs,
+and implement backgrounding properly, but did not have the time...
